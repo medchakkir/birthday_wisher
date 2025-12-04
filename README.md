@@ -27,7 +27,7 @@ An automated birthday email sender that helps you never forget to send birthday 
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/momed-ali01/birthday_wisher.git
+git clone https://github.com/<username>/birthday_wisher.git
 cd birthday_wisher
 ```
 
