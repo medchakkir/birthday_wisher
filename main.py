@@ -1,10 +1,20 @@
-from datetime import datetime
+import os
 import pandas
 import random
 import smtplib
+from dotenv import load_dotenv
+from datetime import datetime
 
-MY_EMAIL = "demahomali01@gmail.com"
-MY_PASSWORD = "sunb qasq lchz bhii"
+# Load environment variables
+load_dotenv()
+
+# Get environment variables
+my_email = os.getenv("MY_EMAIL")
+my_password = os.getenv("MY_PASSWORD")
+
+# Validate environment variables
+if not my_email or not my_password:
+    raise ValueError("MY_EMAIL and MY_PASSWORD must be set in the environment variables")
 
 today = datetime.today()
 today_tuple = (today.month, today.day)
@@ -25,12 +35,9 @@ if today_tuple in birthdays_dict:
 
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
-        connection.login(user=MY_EMAIL, password=MY_PASSWORD)
+        connection.login(user=my_email, password=my_password)
         connection.sendmail(
-            from_addr=MY_EMAIL,
+            from_addr=my_email,
             to_addrs=birthday_person["email"],
             msg=f"Subject:Happy Birthday!\n\n{contents}"
         )
-
-# 4. Send the letter generated in step 3 to that person's email address.
-# HINT: Gmail(smtp.gmail.com), Yahoo(smtp.mail.yahoo.com), Hotmail(smtp.live.com), Outlook(smtp-mail.outlook.com)
